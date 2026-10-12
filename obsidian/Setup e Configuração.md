@@ -13,7 +13,7 @@ parent: "[[Sales Bot — Sistema Multi-Agente]]"
 ## Instalação
 
 ```bash
-git clone https://github.com/vgermano1711/agente-de-automacao
+git clone https://github.com/victor-germano/agente-de-automacao
 cd agente-de-automacao
 node setup.js        # configura .env interativamente
 npm run run-now      # roda pipeline agora + QR WhatsApp
