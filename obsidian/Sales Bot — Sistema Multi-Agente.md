@@ -2,8 +2,8 @@
 tags: [projeto, automação, ia, typescript, whatsapp, vendas]
 data_criacao: 2026-05-26
 status: ativo
-github: https://github.com/vgermano1711/agente-de-automacao
-painel: https://vgermano1711.github.io/Agente-de-automa-o-/
+github: https://github.com/victor-germano/agente-de-automacao
+painel: https://victor-germano.github.io/agente-de-automacao/
 ---
 
 # Sales Bot — Sistema Multi-Agente
@@ -77,8 +77,8 @@ leads_{data}.json
 
 ## Links Importantes
 
-- **GitHub:** https://github.com/vgermano1711/agente-de-automacao
-- **Painel público:** https://vgermano1711.github.io/Agente-de-automa-o-/
+- **GitHub:** https://github.com/victor-germano/agente-de-automacao
+- **Painel público:** https://victor-germano.github.io/agente-de-automacao/
 - **Painel local:** http://localhost:3000 (quando rodar `npm run dev:api`)
 
 ---
