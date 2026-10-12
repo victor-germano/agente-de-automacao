@@ -1,5 +1,5 @@
 ﻿import 'dotenv/config';
-import { generateContent, buildHTML } from './regenerar-pages';
+import { generateContent, buildHTML } from '../regenerar-pages';
 import fs from 'fs';
 import path from 'path';
 

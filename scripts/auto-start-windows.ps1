@@ -2,13 +2,13 @@
 # auto-start-windows.ps1
 # Registra o Sales Bot para iniciar automaticamente no Windows.
 # Execute UMA VEZ como Administrador:
-#   powershell -ExecutionPolicy Bypass -File auto-start-windows.ps1
+#   powershell -ExecutionPolicy Bypass -File scriptsuto-start-windows.ps1
 ##############################################################################
 
 $ErrorActionPreference = 'Stop'
 
-$projectDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$batPath    = Join-Path $projectDir 'pm2-startup.bat'
+$projectDir = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
+$batPath    = Join-Path $projectDir 'scripts\pm2-startup.bat'
 
 Write-Host "`n=== Sales Bot — Auto-Start Setup ===" -ForegroundColor Cyan
 

@@ -113,7 +113,8 @@ sales-automation/
 ├── aprovacao.html              # painel de aprovação
 ├── orchestrator.ts             # coordena os agentes (cron diário)
 ├── ecosystem.config.js         # configuração PM2
-├── gerar-oauth.ts              # setup Gmail OAuth automático
+├── regenerar-pages.ts          # templates das landing pages por segmento
+├── scripts/                    # utilitários: setup, reset, OAuth do Gmail, QR do WhatsApp, auto-start
 ├── start-api.js                # wrapper PM2 para API
 └── start-orchestrator.js       # wrapper PM2 para orchestrator
 ```
@@ -142,7 +143,7 @@ GOOGLE_REFRESH_TOKEN=...
 
 ### 3. Configurar Gmail OAuth
 ```bash
-npx ts-node gerar-oauth.ts
+npx ts-node scripts/gerar-oauth.ts
 ```
 Abre o browser, você autoriza, o token é salvo automaticamente.
 

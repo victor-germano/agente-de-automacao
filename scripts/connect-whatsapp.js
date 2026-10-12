@@ -13,7 +13,7 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = 3002;
-const AUTH_DIR = path.join(__dirname, '.wwebjs_auth');
+const AUTH_DIR = path.join(__dirname, '..', '.wwebjs_auth');
 const LOCK_FILE = path.join(AUTH_DIR, 'session', 'lockfile');
 
 // ── 1. Kill orphaned Puppeteer Chrome processes ──────────────────────────────

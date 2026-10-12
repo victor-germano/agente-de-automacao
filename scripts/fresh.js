@@ -42,7 +42,7 @@ try {
 // ── 3. Reparar URLs Netlify ───────────────────────────────────────────────────
 console.log('\n🔧 Verificando URLs Netlify...');
 try {
-  execSync('node repair-urls.js', { stdio: 'inherit', cwd: process.cwd() });
+  execSync('node scripts/repair-urls.js', { stdio: 'inherit', cwd: process.cwd() });
 } catch (err) {
   console.error('repair-urls falhou (não crítico):', err.message);
 }

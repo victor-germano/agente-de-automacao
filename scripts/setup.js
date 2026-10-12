@@ -143,7 +143,7 @@ function writeEnv(vars) {
     `CRON_SCHEDULE=0 8 * * *`,
     `NOTIFICACOES_ATIVAS=${vars.notificacoes}`,
   ];
-  fs.writeFileSync(path.join(__dirname, '.env'), lines.join('\n'));
+  fs.writeFileSync(path.join(__dirname, '..', '.env'), lines.join('\n'));
 }
 
 function section(title) {
@@ -195,7 +195,7 @@ async function main() {
   print('     Criar em: ' + cyan('app.z-api.io'));
   print('');
   print('  ' + bold('B) whatsapp-web.js') + dim(' — gratuito. Escaneia QR code no terminal.'));
-  print('     Requer: celular com WhatsApp conectado ao computador.'));
+  print('     Requer: celular com WhatsApp conectado ao computador.');
   print('');
   const whatsapp_provider_choice = await ask('Escolha (A para Z-API / B para gratuito):', 'A');
   const whatsapp_provider = whatsapp_provider_choice.toUpperCase() === 'B' ? 'wwebjs' : 'zapi';
@@ -288,7 +288,7 @@ async function main() {
   // ── Instalar dependências ─────────────────────────────────────────────────
   section('Instalando dependências...');
   try {
-    execSync('npm install', { stdio: 'inherit', cwd: __dirname });
+    execSync('npm install', { stdio: 'inherit', cwd: path.join(__dirname, '..') });
     print(green('✓ Dependências instaladas'));
   } catch {
     print(red('✗ Erro ao instalar dependências. Tente rodar: npm install'));
@@ -323,7 +323,7 @@ async function main() {
   }
   print('     ' + cyan('npm run build && pm2 start ecosystem.config.js'));
   print('');
-  print(dim('  .env salvo em: ' + path.join(__dirname, '.env')));
+  print(dim('  .env salvo em: ' + path.join(__dirname, '..', '.env')));
   print('');
 
   rl.close();

@@ -9,8 +9,8 @@
 const fs   = require('fs');
 const path = require('path');
 
-const DATA_DIR  = path.join(__dirname, 'data');
-const PAGES_DIR = path.join(__dirname, 'pages');
+const DATA_DIR  = path.join(__dirname, '..', 'data');
+const PAGES_DIR = path.join(__dirname, '..', 'pages');
 const BASE_URL  = 'http://localhost:3000';
 
 if (!fs.existsSync(DATA_DIR)) {

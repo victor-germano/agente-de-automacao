@@ -8,7 +8,7 @@
 import 'dotenv/config';
 import express from 'express';
 import QRCode from 'qrcode';
-import { log } from './utils/logger';
+import { log } from '../utils/logger';
 
 const app = express();
 const PORT = 3001;
