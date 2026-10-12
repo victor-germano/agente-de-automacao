@@ -28,7 +28,7 @@ parent: "[[Sales Bot — Sistema Multi-Agente]]"
 >
 > \#IA \#Automação \#TypeScript \#Claude \#Empreendedorismo
 
-**Link GitHub (comentário):** https://github.com/vgermano1711/agente-de-automacao
+**Link GitHub (comentário):** https://github.com/victor-germano/agente-de-automacao
 
 ---
 
