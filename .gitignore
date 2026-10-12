@@ -14,3 +14,7 @@ pages/
 .wwebjs_qr.json
 tunnel_url.txt
 run_log*.txt
+
+# Material pessoal (prints de divulgação e notas), fica só na máquina
+prints-linkedin/
+obsidian/
