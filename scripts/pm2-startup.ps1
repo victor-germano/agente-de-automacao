@@ -6,5 +6,5 @@ Start-Sleep -Seconds 15
 $env:PATH = "C:\Program Files\nodejs;$env:PATH;$env:APPDATA\npm"
 $env:HOME = $env:USERPROFILE
 
-Set-Location "C:\Users\vgerm\sales-automation"
+Set-Location (Split-Path -Parent $PSScriptRoot)
 & pm2 resurrect

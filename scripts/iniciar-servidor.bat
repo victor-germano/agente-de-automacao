@@ -1,4 +1,4 @@
 @echo off
-cd /d "C:\Users\vgerm\sales-automation"
+cd /d "%~dp0.."
 pm2 start ecosystem.config.js
 pm2 save
