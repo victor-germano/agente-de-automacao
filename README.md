@@ -124,7 +124,7 @@ sales-automation/
 
 ### 1. Clonar e instalar
 ```bash
-git clone https://github.com/vgermano1711/agente-de-automacao.git
+git clone https://github.com/victor-germano/agente-de-automacao.git
 cd agente-de-automacao
 npm install
 ```
