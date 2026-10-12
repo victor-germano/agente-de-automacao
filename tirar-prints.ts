@@ -11,7 +11,7 @@ import fs from 'fs';
 const OUT_DIR = path.join(process.cwd(), 'prints-linkedin');
 if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR);
 
-const GITHUB_URL = 'https://github.com/vgermano1711/agente-de-automacao/tree/claude/multi-agent-sales-system-bKKdb';
+const GITHUB_URL = 'https://github.com/victor-germano/agente-de-automacao/tree/main';
 const LOCAL_PANEL = 'http://localhost:3000';
 
 async function sleep(ms: number) {
@@ -68,7 +68,7 @@ async function main() {
   // 4. Agents folder no GitHub
   console.log('4/5 — Capturando pasta agents...');
   await page.goto(
-    'https://github.com/vgermano1711/agente-de-automacao/tree/claude/multi-agent-sales-system-bKKdb/agents',
+    'https://github.com/victor-germano/agente-de-automacao/tree/main/agents',
     { waitUntil: 'networkidle2', timeout: 30000 }
   );
   await sleep(2000);
