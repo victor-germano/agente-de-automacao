@@ -1,6 +1,6 @@
 # AI Sales Automation Pipeline
 
-> **Pipeline multi-agente autônomo que prospecta, diagnostica e fecha o ciclo de vendas — do Google Maps ao WhatsApp, sem intervenção humana antes da aprovação final.**
+> **Multi-agent autonomous pipeline that prospects, diagnoses and closes the sales cycle — from Google Maps to WhatsApp, with no human intervention before final approval.**
 
 <p align="center">
   <img src="https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js&logoColor=white"/>
@@ -13,141 +13,141 @@
 
 ---
 
-## O que é
+## What it is
 
-Sistema de automação de prospecção B2B construído como referência de arquitetura multi-agente. Roda automaticamente às 08h, executa todo o funil de vendas e entrega resultados no painel de aprovação — o vendedor só decide o que enviar.
+B2B prospecting automation system built as a multi-agent architecture reference. Runs automatically at 08h, executes the entire sales funnel and delivers results to an approval dashboard — the salesperson only decides what to send.
 
-Cada agente tem responsabilidade única, entrada e saída bem definidas, e pode ser substituído ou escalado de forma independente.
+Each agent has a single responsibility, well-defined input and output, and can be replaced or scaled independently.
 
 ---
 
-## Arquitetura — Pipeline de 7 Agentes
+## Architecture — 7-Agent Pipeline
 
 ```
   Google Maps
       │
       ▼
-  ╔═══════════╗   Busca empresas por setor e cidade
-  ║ AGENTE 1  ║   Filtra por avaliações e potencial de venda
-  ║ Prospector║   Score de prioridade com IA
+  ╔═══════════╗   Searches companies by industry and city
+  ║  AGENT 1  ║   Filters by ratings and sales potential
+  ║ Prospector║   AI-based priority score
   ╚═════╤═════╝
         │ leads.json
         ▼
-  ╔═══════════╗   Analisa o negócio com Claude AI
-  ║ AGENTE 2  ║   Identifica pontos fracos e oportunidades
-  ║Diagnóstico║   Calcula score 0–100
+  ╔═══════════╗   Analyzes the business with Claude AI
+  ║  AGENT 2  ║   Identifies weaknesses and opportunities
+  ║ Diagnosis ║   Calculates score 0–100
   ╚═════╤═════╝
-        │ diagnosticos.json
+        │ diagnostics.json
         ▼
-  ╔═══════════╗   Gera landing page HTML personalizada
-  ║ AGENTE 3  ║   baseada no diagnóstico do negócio
-  ║  Builder  ║   Deploy automático via Surge.sh
+  ╔═══════════╗   Generates a personalized HTML landing page
+  ║  AGENT 3  ║   based on the business diagnosis
+  ║  Builder  ║   Automatic deploy via Surge.sh
   ╚═════╤═════╝
         │ pages/{slug}/index.html
         ▼
-  ╔═══════════╗   Captura vídeo mobile da landing page
-  ║ AGENTE 4  ║   via Puppeteer headless
-  ║   Vídeo   ║
+  ╔═══════════╗   Captures mobile video of the landing page
+  ║  AGENT 4  ║   via headless Puppeteer
+  ║   Video   ║
   ╚═════╤═════╝
         │
         ▼
-  ╔═══════════╗   Gera mensagem de prospecção personalizada
-  ║ AGENTE 5  ║   referenciando diagnóstico e landing page
-  ║   Canal   ║   adapta tom por setor
+  ╔═══════════╗   Generates personalized prospecting message
+  ║  AGENT 5  ║   referencing diagnosis and landing page
+  ║  Channel  ║   adapts tone by industry
   ╚═════╤═════╝
-        │ mensagens.json
+        │ messages.json
         ▼
-  ╔═══════════╗   Revisa com IA — score de qualidade
-  ║ AGENTE 6  ║   Remove padrões genéricos de IA
-  ║  Revisor  ║   Reescreve se score < 80
+  ╔═══════════╗   AI review — quality score
+  ║  AGENT 6  ║   Removes generic AI patterns
+  ║  Reviewer ║   Rewrites if score < 80
   ╚═════╤═════╝
-        │ mensagem aprovada
+        │ approved message
         ▼
   ┌──────────────────────────────────────┐
-  │         PAINEL DE APROVAÇÃO          │  ← único passo manual
-  │  Preview da landing page gerada      │
-  │  Score de qualidade · histórico      │
+  │          APPROVAL DASHBOARD          │  ← only manual step
+  │  Landing page preview                │
+  │  Quality score · history             │
   └─────────────────┬────────────────────┘
-                    │ aprovado
+                    │ approved
                     ▼
-  ╔═══════════╗   Envia via WhatsApp ou Gmail
-  ║ AGENTE 7  ║   Monitora respostas 24/7
-  ║  Handler  ║   Responde leads com IA automaticamente
+  ╔═══════════╗   Sends via WhatsApp or Gmail
+  ║  AGENT 7  ║   Monitors replies 24/7
+  ║  Handler  ║   Responds to leads automatically with AI
   ╚═══════════╝
 ```
 
 ---
 
-## Decisões de Design
+## Design Decisions
 
-**Por que 7 agentes separados e não um único orquestrador?** Cada agente tem seu próprio ciclo de falha, latência e estado. Separar permite reiniciar um estágio individualmente, monitorar métricas por etapa e substituir a implementação de um agente sem tocar nos outros.
+**Why 7 separate agents instead of a single orchestrator?** Each agent has its own failure cycle, latency and state. Separating them allows restarting a single stage, monitoring per-step metrics and replacing one agent's implementation without touching the others.
 
-**Por que PM2 em vez de um job scheduler?** O sistema usa `node-cron` para o agendamento diário + PM2 para auto-restart e boot na inicialização do servidor. A combinação elimina a necessidade de um servidor de filas externo para um único pipeline.
+**Why PM2 instead of a job scheduler?** The system uses `node-cron` for daily scheduling + PM2 for auto-restart and boot on server startup. The combination eliminates the need for an external queue server for a single pipeline.
 
-**Human-in-the-loop deliberado**: o painel de aprovação não é um workaround — é parte da arquitetura. Automação sem revisão gera spam. A aprovação manual antes do envio é a única etapa não automatizável com segurança neste domínio.
+**Deliberate human-in-the-loop**: the approval dashboard is not a workaround — it is part of the architecture. Automation without review generates spam. Manual approval before sending is the only step that cannot safely be automated in this domain.
 
 ---
 
 ## Stack
 
-| Camada | Tecnologia |
+| Layer | Technology |
 |---|---|
-| Linguagem | TypeScript / Node.js 18+ |
-| IA | Anthropic Claude API |
-| Prospecção | Google Places API |
+| Language | TypeScript / Node.js 18+ |
+| AI | Anthropic Claude API |
+| Prospecting | Google Places API |
 | WhatsApp | whatsapp-web.js |
 | Email | Gmail API (OAuth 2.0) |
-| Landing Pages | HTML gerado por IA + Surge.sh |
-| Screenshots/Vídeo | Puppeteer |
-| Servidor | Express.js |
-| Processos | PM2 (auto-restart + boot) |
-| Agendamento | node-cron |
+| Landing Pages | AI-generated HTML + Surge.sh |
+| Screenshots/Video | Puppeteer |
+| Server | Express.js |
+| Processes | PM2 (auto-restart + boot) |
+| Scheduling | node-cron |
 
 ---
 
-## Estrutura
+## Structure
 
 ```
 sales-automation/
 ├── agents/
 │   ├── agent1_prospector.ts    # Google Maps → leads
-│   ├── agent2_diagnostico.ts   # Claude AI → diagnóstico + score
-│   ├── agent3_builder.ts       # HTML personalizado + deploy
-│   ├── agent4_video.ts         # captura mobile headless
-│   ├── agent5_canal.ts         # mensagem de prospecção
-│   ├── agent6_revisor.ts       # revisão de qualidade com IA
-│   └── agent7_handler.ts       # envio + respostas automáticas
+│   ├── agent2_diagnostico.ts   # Claude AI → diagnosis + score
+│   ├── agent3_builder.ts       # personalized HTML + deploy
+│   ├── agent4_video.ts         # headless mobile capture
+│   ├── agent5_canal.ts         # prospecting message
+│   ├── agent6_revisor.ts       # AI quality review
+│   └── agent7_handler.ts       # send + automatic replies
 ├── api/
-│   └── server.ts               # Express API — painel de aprovação
-├── aprovacao.html              # painel web
-├── orchestrator.ts             # cron diário — coordena os agentes
+│   └── server.ts               # Express API — approval dashboard
+├── aprovacao.html              # web dashboard
+├── orchestrator.ts             # daily cron — coordinates agents
 └── ecosystem.config.js         # PM2 config
 ```
 
 ---
 
-## Instalação
+## Setup
 
 ```bash
 git clone https://github.com/victor-germano/agente-de-automacao.git
 cd agente-de-automacao
 npm install
-cp .env.example .env   # preencher as chaves
+cp .env.example .env   # fill in the keys
 ```
 
-**Configurar Gmail OAuth:**
+**Configure Gmail OAuth:**
 ```bash
 npx ts-node scripts/gerar-oauth.ts
 ```
 
-**Iniciar com PM2:**
+**Start with PM2:**
 ```bash
 pm2 start ecosystem.config.js
 pm2 save
-# painel: http://localhost:3000
+# dashboard: http://localhost:3000
 ```
 
-**Variáveis necessárias:**
+**Required environment variables:**
 ```env
 ANTHROPIC_API_KEY=
 GOOGLE_PLACES_API_KEY=
@@ -159,16 +159,16 @@ GOOGLE_REFRESH_TOKEN=
 
 ---
 
-## Monitorar
+## Monitoring
 
 ```bash
-pm2 status       # processos rodando
-pm2 logs         # logs em tempo real
-pm2 monit        # painel interativo
+pm2 status       # running processes
+pm2 logs         # real-time logs
+pm2 monit        # interactive dashboard
 ```
 
 ---
 
-## Licença
+## License
 
 MIT
